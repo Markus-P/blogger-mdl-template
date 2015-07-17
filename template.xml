@@ -361,6 +361,7 @@
                           <!-- <h2 class="mdl-card__title-text"><a expr:href='data:i.url'><data:i.title/></a></h2> -->
                         </div>
                         <!-- /post-title -->
+                        <!-- post-body -->
                         <div class='mdl-card__supporting-text mdl-color-text--grey-600'>
                           <!-- post-date-->
                           <b:if cond='data:i.timestamp'>
@@ -375,6 +376,7 @@
                           <div expr:id='&quot;summary&quot; + data:i.id'><b:if cond='data:i.snippet'><data:i.snippet/></b:if></div>
                           <!-- /summary -->
                         </div>
+                        <!-- /post-body -->
                         <div class='mdl-card__actions mdl-card--border'>
                           <!-- labels -->
                           <i class='material-icons mp-vertical-align--middle'>label_outline</i>
