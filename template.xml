@@ -14,161 +14,165 @@
   <b:skin><![CDATA[*/
   ]]></b:skin>
   <b:template-skin><![CDATA[
-  /*
-   * reset Blogger CSS
-   */
+    /*
+     * reset Blogger CSS
+     */
 
-  .section {
-    margin: initial;
-  }
+    .section {
+      margin: initial;
+    }
 
-  body {
-    padding-bottom: 0;
-  }
+    body {
+      padding-bottom: 0;
+    }
 
-  body a {
-    text-decoration: none;
-    padding-bottom: 0;
-  }
+    body a {
+      text-decoration: none;
+      padding-bottom: 0;
+    }
 
-  #header a {
-    color: inherit;
-    text-decoration: inherit;
-  }
+    #header a {
+      color: inherit;
+      text-decoration: inherit;
+    }
 
-  #header h1 {
-    margin-bottom: auto;
-  }
+    #header h1 {
+      margin-bottom: auto;
+    }
 
-  /*
-   * MDL tweaks
-   */
+    /*
+     * MDL tweaks
+     */
 
-  body {
-    font-family: 'Roboto', 'Helvetica','Arial',sans-serif;
-  }
+    body {
+      font-family: 'Roboto', 'Helvetica','Arial',sans-serif;
+    }
 
-  .mdl-card__supporting-text {
-    padding: 24px;
-    width: calc(100% - 48px); /* is for some reason given as 80%, does not work with absolute padding and flex width */
-  }
+    .mdl-card__supporting-text {
+      padding: 24px;
+      width: calc(100% - 48px); /* is for some reason given as 80%, does not work with absolute padding and flex width */
+    }
 
-  .mdl-card__title {
-    padding: 24px;
-  }
+    .mdl-card__title {
+      padding: 24px;
+    }
 
-  .mdl-card__actions {
-    padding-left : 24px;
-    padding-right : 24px;
-  }
+    .mdl-card__actions {
+      padding-left : 24px;
+      padding-right : 24px;
+    }
 
-  /*
-   * layout and design
-   */
+    /*
+     * layout and design
+     */
 
-  .post-body img {
-    max-width: 100%;
-    height: auto;
-  }
+    .post-body img {
+      max-width: 100%;
+      height: auto;
+    }
 
-  .mp-vertical-align--middle {
-    vertical-align: middle;
-  }
+    .mp-vertical-align--middle {
+      vertical-align: middle;
+    }
 
-  .mp-fab-wrapper {
-    position: absolute; 
-    z-index: 999;
-  }
+    .mp-fab-wrapper {
+      position: absolute; 
+      z-index: 999;
+    }
 
-  /* 
-   * index card 
-   */
+    /* 
+     * index card 
+     */
 
-  .index-card.mdl-card {
-    width: 100%;
-    margin-bottom: 64px;
-  }
+    .index-card.mdl-card {
+      width: 100%;
+      margin-bottom: 64px;
+    }
 
-  .index-card .mp-fab-read-more {
-    top: 432px; /* = height of .mdl-card__title - (56 / 2) */
-    right: 56px;
-  }
+    .index-card .mp-fab-read-more {
+      top: 432px; /* = height of .mdl-card__title - (56 / 2) */
+      right: 56px;
+    }
 
-  .index-card > .mdl-card__title {
-    color: #fff;
-    height: 460px;
-  }
+    .index-card > .mdl-card__title {
+      color: #fff;
+      height: 460px;
+    }
 
-  .index-card > .mdl-card__title h2 a {
-    color: #FFF;
-    text-decoration: none;
-  }
+    .index-card > .mdl-card__title h2 a {
+      color: #FFF;
+      text-decoration: none;
+    }
 
-  .index-card .post-date {
-    margin-bottom: 4px;
-  }
+    .index-card .post-date {
+      margin-bottom: 4px;
+    }
 
-  .index-card > .mdl-card__menu {
-    color: #fff;
-  }
+    .index-card > .mdl-card__menu {
+      color: #fff;
+    }
 
-  /*
-   * sidebar
-   */
+    /*
+     * sidebar
+     */
 
-  #sidebar .mdl-card {
-    width: 100%;
-    min-height: 0;
-  }
+    #sidebar .mdl-card {
+      width: 100%;
+      min-height: 0;
+    }
 
 
-  /* Gallery in single post --------------------------------------- */
+    /*
+     * Blogger tweaks
+     */
 
-  div.mpe-gallery {
-    text-align: center !important;
-    width: 100% !important;
-  }
+    /* Archive gadget --------------------------------------- */
 
-  .mpe-gallery div {
-    display: inline !important;
-    text-align: center !important;
-    float: none !important;
-    clear: none !important;
-    margin: 4px !important;
-  }
+    .BlogArchive #ArchiveList ul.posts li {
+      list-style-type: disc;
+      margin-left: 2em;
+      padding-left: 0;
+      text-indent: 0;
+    }
 
-  .mpe-gallery a {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
+    /*
+     * single post layout
+     */
 
-  /*
-   * Enhancements by Markus Peters
-   */
+    /* my gallery in a single post */
 
-  /* Gallery in single post with titles --------------------------------------- */
+    div.mpe-gallery {
+      text-align: center !important;
+      width: 100% !important;
+    }
 
-  div.mpe-gallery table.tr-caption-container {
-    display: inline-table;
-    width: initial !important;
-  }
+    .mpe-gallery div {
+      display: inline !important;
+      text-align: center !important;
+      float: none !important;
+      clear: none !important;
+      margin: 4px !important;
+    }
 
-  div.mpe-gallery.mpe-2columns table.tr-caption-container {
-    width: 50% !important;
-  }
+    .mpe-gallery a {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
 
-  div.mpe-gallery.mpe-3columns table.tr-caption-container {
-    width: 33% !important;
-  }
+    /* my gallery with titles in a single post */
 
-  /* Archive gadget --------------------------------------- */
+    div.mpe-gallery table.tr-caption-container {
+      display: inline-table;
+      width: initial !important;
+    }
 
-  .BlogArchive #ArchiveList ul.posts li {
-    list-style-type: disc;
-    margin-left: 2em;
-    padding-left: 0;
-    text-indent: 0;
-  }
+    div.mpe-gallery.mpe-2columns table.tr-caption-container {
+      width: 50% !important;
+    }
+
+    div.mpe-gallery.mpe-3columns table.tr-caption-container {
+      width: 33% !important;
+    }
   ]]></b:template-skin>
 
   <script type='text/javascript'>
@@ -527,53 +531,50 @@
           </div>
           <div class='mdl-cell mdl-cell--2-col mdl-cell--3-col-tablet mdl-cell--hide-phone'>
             <b:section class='sidebar' id='sidebar'>
-              <b:widget id='Profile1' locked='false' title='Über mich' type='Profile'>
+              <b:widget id='Label1' locked='false' title='Tags' type='Label'>
                 <b:includable id='main'>
                   <div class='mdl-card mdl-shadow--2dp'>
                     <b:if cond='data:title != &quot;&quot;'>
                       <div class='mdl-card__title mdl-card--border'>
                         <h2 class='mdl-card__title-text'><data:title/></h2>
-                      </div>
+                      </div>                    
                     </b:if>
                     <div class='mdl-card__supporting-text'>
-                      <div class='widget-content'>
-                        <b:if cond='data:team'> <!-- team blog profile -->
+                      <div expr:class='&quot;widget-content &quot; + data:display + &quot;-label-widget-content&quot;'>
+                        <b:if cond='data:display == &quot;list&quot;'>
                           <ul>
-                            <b:loop values='data:authors' var='i'>
-                              <li><a class='profile-name-link g-profile' expr:href='data:i.userUrl' expr:style='&quot;background-image: url(&quot; + data:i.profileLogo + &quot;);&quot;'><data:i.display-name/></a></li>
+                            <b:loop values='data:labels' var='label'>
+                              <li>
+                                <b:if cond='data:blog.url == data:label.url'>
+                                  <span expr:dir='data:blog.languageDirection'><data:label.name/></span>
+                                  <b:else/>
+                                  <a expr:dir='data:blog.languageDirection' expr:href='data:label.url'><data:label.name/></a>
+                                </b:if>
+                                <b:if cond='data:showFreqNumbers'>
+                                  <span dir='ltr'>(<data:label.count/>)</span>
+                                </b:if>
+                              </li>
                             </b:loop>
                           </ul>
-
-                          <b:else/> <!-- normal blog profile -->
-
-                          <b:if cond='data:photo.url != &quot;&quot;'>
-                            <a expr:href='data:userUrl'><img class='profile-img' expr:alt='data:photo.alt' expr:height='data:photo.height' expr:src='data:photo.url' expr:width='data:photo.width'/></a>
-                          </b:if>
-
-                          <dl class='profile-datablock'>
-                            <dt class='profile-data'>
-                              <a class='profile-name-link g-profile' expr:href='data:userUrl' expr:style='&quot;background-image: url(&quot; + data:profileLogo + &quot;);&quot;' rel='author'>
-                                <data:displayname/>
-                              </a>
-                              <b:if cond='data:hasgoogleprofile'>
-                                <br/>
-                                <div class='g-follow' data-annotation='bubble' data-height='20' expr:data-href='data:userUrl'/>
+                          <b:else/>
+                          <b:loop values='data:labels' var='label'>
+                            <span expr:class='&quot;label-size label-size-&quot; + data:label.cssSize'>
+                              <b:if cond='data:blog.url == data:label.url'>
+                                <span expr:dir='data:blog.languageDirection'><data:label.name/></span>
+                                <b:else/>
+                                <a expr:dir='data:blog.languageDirection' expr:href='data:label.url'><data:label.name/></a>
                               </b:if>
-                            </dt>
-
-                            <b:if cond='data:showlocation'>
-                              <dd class='profile-data'><data:location/></dd>
-                            </b:if>
-
-                            <b:if cond='data:aboutme != &quot;&quot;'><dd class='profile-textblock'><data:aboutme/></dd></b:if>
-                          </dl>
-                          <a class='profile-link' expr:href='data:userUrl' rel='author'><data:viewProfileMsg/></a>
+                              <b:if cond='data:showFreqNumbers'>
+                                <span class='label-count' dir='ltr'>(<data:label.count/>)</span>
+                              </b:if>
+                            </span>
+                          </b:loop>
                         </b:if>
                         <b:include name='quickedit'/>
                       </div>
                     </div>
                   </div>
-              </b:includable>
+                </b:includable>
               </b:widget>
               <b:widget id='BlogArchive1' locked='false' title='Blog-Archiv' type='BlogArchive'>
                 <b:includable id='main'>
@@ -650,50 +651,53 @@
               </a>
             </b:includable>
               </b:widget>
-              <b:widget id='Label1' locked='false' title='Tags' type='Label'>
+              <b:widget id='Profile1' locked='false' title='Über mich' type='Profile'>
                 <b:includable id='main'>
                   <div class='mdl-card mdl-shadow--2dp'>
                     <b:if cond='data:title != &quot;&quot;'>
                       <div class='mdl-card__title mdl-card--border'>
                         <h2 class='mdl-card__title-text'><data:title/></h2>
-                      </div>                    
+                      </div>
                     </b:if>
                     <div class='mdl-card__supporting-text'>
-                      <div expr:class='&quot;widget-content &quot; + data:display + &quot;-label-widget-content&quot;'>
-                        <b:if cond='data:display == &quot;list&quot;'>
+                      <div class='widget-content'>
+                        <b:if cond='data:team'> <!-- team blog profile -->
                           <ul>
-                            <b:loop values='data:labels' var='label'>
-                              <li>
-                                <b:if cond='data:blog.url == data:label.url'>
-                                  <span expr:dir='data:blog.languageDirection'><data:label.name/></span>
-                                  <b:else/>
-                                  <a expr:dir='data:blog.languageDirection' expr:href='data:label.url'><data:label.name/></a>
-                                </b:if>
-                                <b:if cond='data:showFreqNumbers'>
-                                  <span dir='ltr'>(<data:label.count/>)</span>
-                                </b:if>
-                              </li>
+                            <b:loop values='data:authors' var='i'>
+                              <li><a class='profile-name-link g-profile' expr:href='data:i.userUrl' expr:style='&quot;background-image: url(&quot; + data:i.profileLogo + &quot;);&quot;'><data:i.display-name/></a></li>
                             </b:loop>
                           </ul>
-                          <b:else/>
-                          <b:loop values='data:labels' var='label'>
-                            <span expr:class='&quot;label-size label-size-&quot; + data:label.cssSize'>
-                              <b:if cond='data:blog.url == data:label.url'>
-                                <span expr:dir='data:blog.languageDirection'><data:label.name/></span>
-                                <b:else/>
-                                <a expr:dir='data:blog.languageDirection' expr:href='data:label.url'><data:label.name/></a>
+
+                          <b:else/> <!-- normal blog profile -->
+
+                          <b:if cond='data:photo.url != &quot;&quot;'>
+                            <a expr:href='data:userUrl'><img class='profile-img' expr:alt='data:photo.alt' expr:height='data:photo.height' expr:src='data:photo.url' expr:width='data:photo.width'/></a>
+                          </b:if>
+
+                          <dl class='profile-datablock'>
+                            <dt class='profile-data'>
+                              <a class='profile-name-link g-profile' expr:href='data:userUrl' expr:style='&quot;background-image: url(&quot; + data:profileLogo + &quot;);&quot;' rel='author'>
+                                <data:displayname/>
+                              </a>
+                              <b:if cond='data:hasgoogleprofile'>
+                                <br/>
+                                <div class='g-follow' data-annotation='bubble' data-height='20' expr:data-href='data:userUrl'/>
                               </b:if>
-                              <b:if cond='data:showFreqNumbers'>
-                                <span class='label-count' dir='ltr'>(<data:label.count/>)</span>
-                              </b:if>
-                            </span>
-                          </b:loop>
+                            </dt>
+
+                            <b:if cond='data:showlocation'>
+                              <dd class='profile-data'><data:location/></dd>
+                            </b:if>
+
+                            <b:if cond='data:aboutme != &quot;&quot;'><dd class='profile-textblock'><data:aboutme/></dd></b:if>
+                          </dl>
+                          <a class='profile-link' expr:href='data:userUrl' rel='author'><data:viewProfileMsg/></a>
                         </b:if>
                         <b:include name='quickedit'/>
                       </div>
                     </div>
                   </div>
-                </b:includable>
+              </b:includable>
               </b:widget>
             </b:section></div>
           <div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet  mdl-cell--hide-phone'/>
