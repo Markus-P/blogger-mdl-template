@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <!-- include MDL, mpe -->
+  <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'/>
+  <link href='https://storage.googleapis.com/code.getmdl.io/1.0.0/material.blue-red.min.css' rel='stylesheet'/> 
+  <script src='https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js'/>
+  <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'/>
+
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'/>
+  <title><data:blog.pageTitle/></title>
+  <b:include data='blog' name='all-head-content'/>
+  <b:skin><![CDATA[*/
+  ]]></b:skin>
+  <b:template-skin><![CDATA[
+  /*
+   * reset Blogger CSS
+   */
+
+  .section {
+    margin: initial;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+
+  body a {
+    text-decoration: none;
+    padding-bottom: 0;
+  }
+
+  #header a {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  #header h1 {
+    margin-bottom: auto;
+  }
+
+  /*
+   * MDL tweaks
+   */
+
+  body {
+    font-family: 'Roboto', 'Helvetica','Arial',sans-serif;
+  }
+
+  .mdl-card__supporting-text {
+    padding: 24px;
+    width: calc(100% - 48px); /* is for some reason given as 80%, does not work with absolute padding and flex width */
+  }
+
+  .mdl-card__title {
+    padding: 24px;
+  }
+
+  .mdl-card__actions {
+    padding-left : 24px;
+    padding-right : 24px;
+  }
+
+  /*
+   * layout and design
+   */
+
+  .post-body img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .mp-vertical-align--middle {
+    vertical-align: middle;
+  }
+
+  .mp-fab-wrapper {
+    position: absolute; 
+    z-index: 999;
+  }
+
+  /* 
+   * index card 
+   */
+
+  .index-card.mdl-card {
+    width: 100%;
+    margin-bottom: 64px;
+  }
+
+  .index-card .mp-fab-read-more {
+    top: 432px; /* = height of .mdl-card__title - (56 / 2) */
+    right: 56px;
+  }
+
+  .index-card > .mdl-card__title {
+    color: #fff;
+    height: 460px;
+  }
+
+  .index-card > .mdl-card__title h2 a {
+    color: #FFF;
+    text-decoration: none;
+  }
+
+  .index-card .post-date {
+    margin-bottom: 4px;
+  }
+
+  .index-card > .mdl-card__menu {
+    color: #fff;
+  }
+
+  /*
+   * sidebar
+   */
+
+  #sidebar .mdl-card {
+    width: 100%;
+    min-height: 0;
+  }
+
+
+  /* Gallery in single post --------------------------------------- */
+
+  div.mpe-gallery {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .mpe-gallery div {
+    display: inline !important;
+    text-align: center !important;
+    float: none !important;
+    clear: none !important;
+    margin: 4px !important;
+  }
+
+  .mpe-gallery a {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /*
+   * Enhancements by Markus Peters
+   */
+
+  /* Gallery in single post with titles --------------------------------------- */
+
+  div.mpe-gallery table.tr-caption-container {
+    display: inline-table;
+    width: initial !important;
+  }
+
+  div.mpe-gallery.mpe-2columns table.tr-caption-container {
+    width: 50% !important;
+  }
+
+  div.mpe-gallery.mpe-3columns table.tr-caption-container {
+    width: 33% !important;
+  }
+
+  /* Archive gadget --------------------------------------- */
+
+  .BlogArchive #ArchiveList ul.posts li {
+    list-style-type: disc;
+    margin-left: 2em;
+    padding-left: 0;
+    text-indent: 0;
+  }
+  ]]></b:template-skin>
+
+  <script type='text/javascript'>
+  //<![CDATA[
+    function stripHtml(str) {
+      str=str.replace(/<br>/gi, " ");
+      str=str.replace(/<br \/>/gi, " ");
+      str=str.replace(/<br\/>/gi, " ");
+      str=str.replace(/<p.*>/gi, " ");
+      // str=str.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, " $2 (Link->$1) ");
+      str=str.replace(/<(?:.|\s)*?>/g, "");   
+      str=str.replace(/\s+/g, " ");    
+  
+      return str;
+    }
+
+    /**
+     *Truncate text with respoct of word boundarys.
+     */
+    // LEGACY
+    function truncateText(str, n) {
+      str = stripHtml(str.trim());
+      var orig_length = str.length;
+      var tooLong = str.length > n;
+
+      // Edge case where someone enters a ridiculously long string.
+      str = tooLong ? str.substr(0, n-1) : str;
+
+      var singular = (str.search(/\s/) === -1) ? true : false;
+      if(!singular) {
+        // find word boundarys
+        str = tooLong ? str.substr(0, str.lastIndexOf(' ')) : str;
+      }
+
+      return  str.length < orig_length ? str + '&nbsp;&hellip;' : str;
+    }
+
+    function setInnerHtml(id, str) {
+      var element = document.getElementById(id);
+      element.innerText = str;
+    }
+
+    function formatTimestamp(d) { 
+      var da = d.split(' '); 
+      var weekday = da[0];
+      var month = da[1]; 
+      var day = parseInt(da[2].slice(0,2)).toString();
+      var year = da[3];
+
+      return weekday + ' ' + day + '. '  + month  + ' ' + year;
+    } 
+  //]]>
+  </script>
+</head>
+
+<body expr:class='&quot;loading&quot;  + data:blog.mobileClass +  &quot; &quot;  + data:blog.pageType + &quot; mdl-color--grey-100 mdl-color-text--grey-700&quot;'>
+  <div class='mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button mdl-layout--fixed-header'>
+    <header class='mdl-layout__header'>
+      <!-- Top row, always visible -->
+      <div class='mdl-layout__header-row'>
+        <!-- Menu button -->
+        <div class='mdl-layout-icon'/>
+        <!-- Title -->
+        <span class='mdl-layout-title'>
+          <b:section class='header' id='header'>
+            <b:widget id='Header1' locked='false' title='MDL-Template (Header)' type='Header'>
+              <b:includable id='main'>
+                <b:include name='title'/>
+              </b:includable>
+              <b:includable id='description'/>
+              <b:includable id='longtitle'>
+                <b:if cond='data:description == &quot;&quot; or true'>
+                  <data:title/>
+                <b:else/>
+                  <data:title/> | <data:description/>
+                </b:if>
+              </b:includable>
+              <b:includable id='title'>
+                <h1 class='mdl-layout-title'><a expr:href='data:blog.homepageUrl'><b:include name='longtitle'/></a></h1>
+              </b:includable>
+            </b:widget>
+          </b:section>
+        </span>
+
+        <div class='mdl-layout-spacer'/>
+
+        <!-- Navigation -->
+        <nav class='mdl-navigation mdl-layout--large-screen-only'>
+          <a class='mdl-navigation__link' expr:href='data:blog.homepageUrl'>Home</a>
+          <a class='mdl-navigation__link' href='/p/info.html'>Info</a>
+          <a class='mdl-navigation__link' href='/p/gear.html'>Gear</a>
+          <a class='mdl-navigation__link' href='/p/kontakt.html'>Kontakt</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class='mdl-layout__drawer'>
+      <span class='mdl-layout-title'><data:blog.title/></span>
+      <nav class='mdl-navigation'>
+        <a class='mdl-navigation__link' expr:href='data:blog.homepageUrl'>Home</a>
+        <a class='mdl-navigation__link' href='/p/info.html'>Info</a>
+        <a class='mdl-navigation__link' href='/p/gear.html'>Gear</a>
+        <a class='mdl-navigation__link' href='/p/kontakt.html'>Kontakt</a>
+      </nav>
+    </div>
+
+    <main class='mdl-layout__content'>
+      <div class='page-content'><!-- Your content goes here -->
+        <div class='mdl-grid' style='max-width: 1870px'>
+          <div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet  mdl-cell--hide-phone'/>
+          <div class='mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone'>
+            <b:section class='main' id='main'>
+              <b:widget id='Blog1' locked='false' title='Blogposts' type='Blog'>
+                <b:includable id='main' var='top'>
+                  <!-- posts newnew  -->
+                  <b:loop values='data:posts' var='post'>      
+                    <b:include data='post' name='post'/>    
+                  </b:loop>
+                  <!-- navigation -->
+                  <b:include name='nextprev'/>
+                </b:includable>
+                <b:includable id='backlinkDeleteIcon'/>
+                <b:includable id='backlinks'/>
+                <b:includable id='comment-form'/>
+                <b:includable id='commentDeleteIcon'/>
+                <b:includable id='comment_count_picker'/>
+                <b:includable id='comment_picker'/>
+                <b:includable id='comments'/>
+                <b:includable id='feedLinks'/>
+                <b:includable id='feedLinksBody'/>
+                <b:includable id='iframe_comments' var='i'>	
+                  <b:if cond='data:i.allowIframeComments'>
+                    <script expr:src='data:i.iframeCommentSrc' type='text/javascript'/>
+                    <div class='cmt_iframe_holder' expr:data-href='data:i.canonicalUrl' expr:data-viewtype='data:i.viewType'/>
+                  </b:if>
+                </b:includable>
+                <b:includable id='mobile-index-post'/>
+                <b:includable id='mobile-main'/>
+                <b:includable id='mobile-nextprev'/>
+                <b:includable id='mobile-post'/>
+                <b:includable id='nextprev'>
+                  <ul class='pager'>
+                    <b:if cond='data:newerPageUrl'>
+                      <li class='next'>
+                        <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'><data:newerPageTitle/></a>
+                      </li>
+                    </b:if>
+
+                    <b:if cond='data:olderPageUrl'>
+                      <li class='previous'>
+                        <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:olderPageTitle'><data:olderPageTitle/></a>
+                      </li>
+                    </b:if>		
+                  </ul>
+                </b:includable>
+                <b:includable id='post' var='i'>
+                  <!-- DEFINE POST -->
+                  <article expr:id='data:i.id'>
+                    <b:if cond='data:blog.pageType in {&quot;index&quot;, &quot;archive&quot;}'>
+                      <!-- INDEX OR ARCHIVE -->
+                      <div class='mdl-card mdl-shadow--2dp index-card'>
+                        <!-- fab -->
+                        <a class='mp-fab-read-more mp-fab-wrapper' expr:href='data:i.url' expr:id='&quot;read-more-anchor_&quot; + data:i.id'>
+                          <button class='mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored'>
+                            <i class='material-icons'>launch</i>
+                          </button>
+                        </a>
+                        <!-- tooltip -->
+                        <div class='mdl-tooltip' expr:for='&quot;read-more-anchor_&quot; + data:i.id'>
+                          Beitrag öffnen
+                        </div>
+                        <!-- /tooltip -->
+                        <!-- /fab -->
+                        <!-- post-title -->
+                        <div class='mdl-card__title' expr:style='&quot;background: url(&quot; + data:i.firstImageUrl + &quot;) center / cover&quot;'>
+                          <h2 class='mdl-card__title-text'><data:i.title/></h2>
+                          <!-- <h2 class="mdl-card__title-text"><a expr:href='data:i.url'><data:i.title/></a></h2> -->
+                        </div>
+                        <!-- /post-title -->
+                        <div class='mdl-card__supporting-text mdl-color-text--grey-600'>
+                          <!-- post-date-->
+                          <b:if cond='data:i.timestamp'>
+                            <p>
+                              <i class='material-icons mp-vertical-align--middle'>schedule</i>
+                              <span class='mdl-card__subtitle-text post-date mp-vertical-align--middle' expr:id='&quot;timestamp&quot; + data:i.id' itemprop='date'><data:i.timestamp/></span>
+                              <script type='text/javascript'>setInnerHtml(&#39;timestamp<data:i.id/>&#39;, formatTimestamp(&#39;<data:i.timestamp/>&#39;));</script>                       
+                            </p>
+                          </b:if>
+                          <!-- /post-date-->
+                          <!-- summary -->
+                          <div expr:id='&quot;summary&quot; + data:i.id'><b:if cond='data:i.snippet'><data:i.snippet/></b:if></div>
+                          <!-- /summary -->
+                        </div>
+                        <div class='mdl-card__actions mdl-card--border'>
+                          <!-- labels -->
+                          <i class='material-icons mp-vertical-align--middle'>label_outline</i>
+                          <b:loop values='data:i.labels' var='label'>      
+                            <b:include data='label' name='post-label'/>    
+                          </b:loop>
+                          <!-- /labels -->
+                        </div>
+                        <div class='mdl-card__menu'>
+                          <button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect'>
+                            <i class='material-icons'>share</i>
+                          </button>
+                        </div>
+                      </div>
+                      <!-- /INDEX OR ARCHIVE -->
+                    <b:else/> 
+                      <!-- ITEM, STATIC PAGE, ERROR_PAGE -->
+                      <style>
+                        .item-card.mdl-card {
+                          width: 100%;
+                        }
+                      </style>
+                      <div class='mdl-card mdl-shadow--2dp item-card'>
+                        <div class='mdl-card__supporting-text mdl-color-text--grey-600'>
+                          <b:include name='quickedit'/>
+                          <div class='post' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+                            <b:if cond='data:post.firstImageUrl'>
+                              <meta expr:content='data:i.firstImageUrl' itemprop='image_url'/>
+                            </b:if>
+                            <meta expr:content='data:blog.blogId' itemprop='blogId'/>
+                            <meta expr:content='data:i.id' itemprop='postId'/>
+                            <a expr:name='data:i.id'/>
+                            <header>
+                              <div class='post-header'>
+                                <b:if cond='data:i.title'>
+
+                                  <!-- post-title -->
+                                  <div class='post-title'>
+                                    <h2 itemprop='name'>
+                                      <b:if cond='data:i.link'>
+                                        <a expr:href='data:i.link'><data:i.title/></a>
+                                        <b:else/>
+                                        <b:if cond='data:i.url'>
+                                          <b:if cond='data:blog.url != data:post.url'>
+                                            <a expr:href='data:i.url'><data:i.title/></a>
+                                            <b:else/>
+                                            <data:i.title/>
+                                          </b:if>
+                                          <b:else/>
+                                          <data:i.title/>
+                                        </b:if>
+                                      </b:if>
+                                    </h2>
+                                  </div>
+                                  <!-- post-title end -->
+
+                                  <!-- post-date-->
+                                  <b:if cond='data:i.dateHeader'>
+                                    <div class='post-date'> 
+                                      <h3 itemprop='date'>
+                                        <span><data:i.dateHeader/></span>
+                                      </h3>
+                                    </div>
+                                  </b:if>
+                                  <!-- post-date end-->
+
+                                </b:if>
+
+                                <!-- post-author -->
+                                <div class='post-author'>				
+                                  <b:if cond='data:top.showAuthor'>
+                                    <span>
+                                      <data:top.authorLabel/>
+                                    </span>
+                                    <b:if cond='data:i.authorProfileUrl'>
+                                      <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+                                        <meta expr:content='data:i.authorProfileUrl' itemprop='url'/>
+                                        <a class='g-profile' expr:href='data:i.authorProfileUrl' rel='author' title='author profile'>
+                                          <span itemprop='name'><data:i.author/></span>
+                                        </a>
+                                      </span>
+                                      <b:else/>
+                                      <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+                                        <span itemprop='name'><data:i.author/></span>
+                                      </span>
+                                    </b:if>
+                                  </b:if>
+                                </div> 
+                                <!-- post-author end -->
+
+                              </div>
+                            </header>
+
+                            <!-- post-body -->
+                            <b:if cond='data:blog.metaDescription == &quot;&quot;'>
+                              <div class='post-body' expr:id='&quot;post-body-&quot; + data:i.id' itemprop='description articleBody'>
+                                <data:i.body/>
+                              </div>
+                              <b:else/>
+                              <div class='post-body' expr:id='&quot;post-body-&quot; + data:i.id' itemprop='articleBody'>
+                                <data:i.body/>
+                              </div>
+                            </b:if>
+
+                            <b:if cond='data:i.hasJumpLink'>
+                              <div class='jump-link'>
+                                <a expr:href='data:i.url + &quot;#more&quot;' expr:title='data:i.title'><data:i.jumpText/></a>
+                              </div>
+                            </b:if>
+                            <!-- post-body end -->
+
+                            <!-- G+ comments -->
+                            <b:if cond='data:blog.pageType == &quot;item&quot;'>
+                              <b:include data='i' name='iframe_comments'/>
+                            </b:if>
+                            <!-- G+ comments end -->
+
+                            <!-- social-buttons -->
+                            <b:if cond='data:blog.isMobile'>
+                              <b:else/>
+                              <b:if cond='data:blog.pageType != &quot;item&quot;'>
+                                <b:if cond='data:blog.pageType != &quot;static_page&quot;'>
+                                  <div class='social-buttons'>
+                                    <span class='g-plusone' data-align='right' data-annotation='bubble' data-size='medium' data-width='300' expr:data-href='data:i.canonicalUrl'/>
+                                    <a class='twitter-share-button' data-lang='de' data-size='medium' expr:data-url='data:i.canonicalUrl' href='https://twitter.com/share'>Twittern</a>
+                                    <script>
+                                      //<![CDATA[
+                                      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');//]]>
+                                    </script>
+                                  </div>
+                                </b:if> 
+                              </b:if>
+                            </b:if>
+                            <!-- social-buttons end-->
+                          </div>
+                        </div>
+                      </div> <!-- card -->
+                      <!-- /ITEM, STATIC PAGE, ERROR_PAGE -->
+                    </b:if>
+                  </article>
+                  <!-- /DEFINE POST -->
+                </b:includable>
+                <b:includable id='post-label' var='i'>	
+                  <!-- Flat button with ripple -->
+                  <a class='mp-vertical-align--middle' expr:href='data:i.url'>
+                    <button class='mdl-button mdl-js-button mdl-js-ripple-effect'>
+                      <data:i.name/>
+                    </button>
+                  </a>
+                  <b:if cond='data:i.allowIframeComments'>
+                    <script expr:src='data:i.iframeCommentSrc' type='text/javascript'/>
+                    <div class='cmt_iframe_holder' expr:data-href='data:i.canonicalUrl' expr:data-viewtype='data:i.viewType'/>
+                  </b:if>
+                </b:includable>
+                <b:includable id='postQuickEdit'/>
+                <b:includable id='shareButtons'/>
+                <b:includable id='status-message'/>
+                <b:includable id='threaded-comment-form'/>
+                <b:includable id='threaded_comment_js'/>
+                <b:includable id='threaded_comments'/>
+              </b:widget>
+            </b:section>
+          </div>
+          <div class='mdl-cell mdl-cell--2-col mdl-cell--3-col-tablet mdl-cell--hide-phone'>
+            <b:section class='sidebar' id='sidebar'>
+              <b:widget id='Profile1' locked='false' title='Über mich' type='Profile'>
+                <b:includable id='main'>
+                  <div class='mdl-card mdl-shadow--2dp'>
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <div class='mdl-card__title mdl-card--border'>
+                        <h2 class='mdl-card__title-text'><data:title/></h2>
+                      </div>
+                    </b:if>
+                    <div class='mdl-card__supporting-text'>
+                      <div class='widget-content'>
+                        <b:if cond='data:team'> <!-- team blog profile -->
+                          <ul>
+                            <b:loop values='data:authors' var='i'>
+                              <li><a class='profile-name-link g-profile' expr:href='data:i.userUrl' expr:style='&quot;background-image: url(&quot; + data:i.profileLogo + &quot;);&quot;'><data:i.display-name/></a></li>
+                            </b:loop>
+                          </ul>
+
+                          <b:else/> <!-- normal blog profile -->
+
+                          <b:if cond='data:photo.url != &quot;&quot;'>
+                            <a expr:href='data:userUrl'><img class='profile-img' expr:alt='data:photo.alt' expr:height='data:photo.height' expr:src='data:photo.url' expr:width='data:photo.width'/></a>
+                          </b:if>
+
+                          <dl class='profile-datablock'>
+                            <dt class='profile-data'>
+                              <a class='profile-name-link g-profile' expr:href='data:userUrl' expr:style='&quot;background-image: url(&quot; + data:profileLogo + &quot;);&quot;' rel='author'>
+                                <data:displayname/>
+                              </a>
+                              <b:if cond='data:hasgoogleprofile'>
+                                <br/>
+                                <div class='g-follow' data-annotation='bubble' data-height='20' expr:data-href='data:userUrl'/>
+                              </b:if>
+                            </dt>
+
+                            <b:if cond='data:showlocation'>
+                              <dd class='profile-data'><data:location/></dd>
+                            </b:if>
+
+                            <b:if cond='data:aboutme != &quot;&quot;'><dd class='profile-textblock'><data:aboutme/></dd></b:if>
+                          </dl>
+                          <a class='profile-link' expr:href='data:userUrl' rel='author'><data:viewProfileMsg/></a>
+                        </b:if>
+                        <b:include name='quickedit'/>
+                      </div>
+                    </div>
+                  </div>
+              </b:includable>
+              </b:widget>
+              <b:widget id='BlogArchive1' locked='false' title='Blog-Archiv' type='BlogArchive'>
+                <b:includable id='main'>
+                  <div class='mdl-card mdl-shadow--2dp'>
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <div class='mdl-card__title mdl-card--border'>
+                        <h2 class='mdl-card__title-text'><data:title/></h2>
+                      </div>
+                    </b:if>
+                    <div class='mdl-card__supporting-text'>
+                      <div class='widget-content'>
+                        <div id='ArchiveList'>
+                          <div expr:id='data:widget.instanceId + &quot;_ArchiveList&quot;'>
+                            <b:include cond='data:style == &quot;HIERARCHY&quot;' data='data' name='interval'/>
+                            <b:include cond='data:style == &quot;FLAT&quot;' data='data' name='flat'/>
+                            <b:include cond='data:style == &quot;MENU&quot;' data='data' name='menu'/>
+                          </div>
+                        </div>
+                        <b:include name='quickedit'/>
+                      </div>
+                    </div>
+                  </div>              
+                </b:includable>
+                <b:includable id='flat' var='data'>
+              <ul class='flat'>
+                <b:loop values='data:data' var='i'>
+                  <li class='archivedate'>
+                    <a expr:href='data:i.url'><data:i.name/></a> (<data:i.post-count/>)
+                  </li>
+                </b:loop>
+              </ul>
+            </b:includable>
+                <b:includable id='interval' var='intervalData'>
+              <b:loop values='data:intervalData' var='interval'>
+                <ul class='hierarchy'>
+                  <li expr:class='&quot;archivedate &quot; + data:interval.expclass'>
+                    <b:include cond='data:interval.toggleId' data='interval' name='toggle'/>
+                    <a class='post-count-link' expr:href='data:interval.url'>
+                      <data:interval.name/>
+                    </a>
+                    <span class='post-count' dir='ltr'>(<data:interval.post-count/>)</span>
+                    <b:include cond='data:interval.data' data='interval.data' name='interval'/>
+                    <b:include cond='data:interval.posts' data='interval.posts' name='posts'/>
+                  </li>
+                </ul>
+              </b:loop>
+            </b:includable>
+                <b:includable id='menu' var='data'>
+              <select expr:id='data:widget.instanceId + &quot;_ArchiveMenu&quot;'>
+                <option value=''><data:title/></option>
+                <b:loop values='data:data' var='i'>
+                  <option expr:value='data:i.url'><data:i.name/> (<data:i.post-count/>)</option>
+                </b:loop>
+              </select>
+            </b:includable>
+                <b:includable id='posts' var='posts'>
+              <ul class='posts'>
+                <b:loop values='data:posts' var='post'>
+                  <li><a expr:href='data:post.url'><data:post.title/></a></li>
+                </b:loop>
+              </ul>
+            </b:includable>
+                <b:includable id='toggle' var='interval'>
+              <a class='toggle' href='javascript:void(0)'>
+                <span expr:class='&quot;zippy&quot; + (data:interval.expclass == &quot;expanded&quot; ? &quot; toggle-open&quot; : &quot;&quot;)'>
+                  <b:if cond='data:interval.expclass == &quot;expanded&quot;'>
+                    &#9660;&#160;
+                  <b:elseif cond='data:blog.languageDirection == &quot;rtl&quot;'/>
+                    &#9668;&#160;
+                  <b:else/>
+                    &#9658;&#160;
+                  </b:if>
+                </span>
+              </a>
+            </b:includable>
+              </b:widget>
+              <b:widget id='Label1' locked='false' title='Tags' type='Label'>
+                <b:includable id='main'>
+                  <div class='mdl-card mdl-shadow--2dp'>
+                    <b:if cond='data:title != &quot;&quot;'>
+                      <div class='mdl-card__title mdl-card--border'>
+                        <h2 class='mdl-card__title-text'><data:title/></h2>
+                      </div>                    
+                    </b:if>
+                    <div class='mdl-card__supporting-text'>
+                      <div expr:class='&quot;widget-content &quot; + data:display + &quot;-label-widget-content&quot;'>
+                        <b:if cond='data:display == &quot;list&quot;'>
+                          <ul>
+                            <b:loop values='data:labels' var='label'>
+                              <li>
+                                <b:if cond='data:blog.url == data:label.url'>
+                                  <span expr:dir='data:blog.languageDirection'><data:label.name/></span>
+                                  <b:else/>
+                                  <a expr:dir='data:blog.languageDirection' expr:href='data:label.url'><data:label.name/></a>
+                                </b:if>
+                                <b:if cond='data:showFreqNumbers'>
+                                  <span dir='ltr'>(<data:label.count/>)</span>
+                                </b:if>
+                              </li>
+                            </b:loop>
+                          </ul>
+                          <b:else/>
+                          <b:loop values='data:labels' var='label'>
+                            <span expr:class='&quot;label-size label-size-&quot; + data:label.cssSize'>
+                              <b:if cond='data:blog.url == data:label.url'>
+                                <span expr:dir='data:blog.languageDirection'><data:label.name/></span>
+                                <b:else/>
+                                <a expr:dir='data:blog.languageDirection' expr:href='data:label.url'><data:label.name/></a>
+                              </b:if>
+                              <b:if cond='data:showFreqNumbers'>
+                                <span class='label-count' dir='ltr'>(<data:label.count/>)</span>
+                              </b:if>
+                            </span>
+                          </b:loop>
+                        </b:if>
+                        <b:include name='quickedit'/>
+                      </div>
+                    </div>
+                  </div>
+                </b:includable>
+              </b:widget>
+            </b:section></div>
+          <div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet  mdl-cell--hide-phone'/>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
