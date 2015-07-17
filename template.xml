@@ -14,9 +14,9 @@
   <b:skin><![CDATA[*/
   ]]></b:skin>
   <b:template-skin><![CDATA[
-    /*
-     * reset Blogger CSS
-     */
+    /*********************
+     * reset Blogger CSS *
+     *********************/
 
     .section {
       margin: initial;
@@ -40,9 +40,9 @@
       margin-bottom: auto;
     }
 
-    /*
-     * MDL tweaks
-     */
+    /**************
+     * MDL tweaks *
+     **************/
 
     body {
       font-family: 'Roboto', 'Helvetica','Arial',sans-serif;
@@ -50,7 +50,7 @@
 
     .mdl-card__supporting-text {
       padding: 24px;
-      width: calc(100% - 48px); /* is for some reason given as 80%, does not work with absolute padding and flex width */
+      width: calc(100% - 48px); /* is for some reason given as 80%, does not work with MDL given absolute padding and flex width */
     }
 
     .mdl-card__title {
@@ -62,18 +62,24 @@
       padding-right : 24px;
     }
 
-    /*
-     * layout and design
-     */
+    /* *******************************
+     * MDL related layout and design *
+     *********************************/
+
+    /* let images shrink */
 
     .post-body img {
       max-width: 100%;
       height: auto;
     }
 
+    /* just a short cut class */
+
     .mp-vertical-align--middle {
       vertical-align: middle;
     }
+
+    /* let FAB float and stay on top */
 
     .mp-fab-wrapper {
       position: absolute; 
@@ -121,19 +127,9 @@
       min-height: 0;
     }
 
-
-    /*
-     * Blogger tweaks
-     */
-
-    /* Archive gadget --------------------------------------- */
-
-    .BlogArchive #ArchiveList ul.posts li {
-      list-style-type: disc;
-      margin-left: 2em;
-      padding-left: 0;
-      text-indent: 0;
-    }
+    /* ***************************
+     * general layout and design *
+     *****************************/
 
     /*
      * single post layout
@@ -172,6 +168,19 @@
 
     div.mpe-gallery.mpe-3columns table.tr-caption-container {
       width: 33% !important;
+    }
+
+    /* ****************
+     * Blogger tweaks *
+     ******************/
+
+    /* correct indention in archive gadget */
+
+    .BlogArchive #ArchiveList ul.posts li {
+      list-style-type: disc;
+      margin-left: 2em;
+      padding-left: 0;
+      text-indent: 0;
     }
   ]]></b:template-skin>
 
