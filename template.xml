@@ -239,6 +239,8 @@
 
 <body expr:class='&quot;loading&quot;  + data:blog.mobileClass +  &quot; &quot;  + data:blog.pageType + &quot; mdl-color--grey-100 mdl-color-text--grey-700&quot;'>
   <div class='mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button mdl-layout--fixed-header'>
+    <!-- MDL layout control -->
+    <!-- MDL layout control: header -->
     <header class='mdl-layout__header'>
       <!-- Top row, always visible -->
       <div class='mdl-layout__header-row'>
@@ -277,7 +279,7 @@
         </nav>
       </div>
     </header>
-
+    <!-- MDL layout control: drawer -->
     <div class='mdl-layout__drawer'>
       <span class='mdl-layout-title'><data:blog.title/></span>
       <nav class='mdl-navigation'>
@@ -287,11 +289,14 @@
         <a class='mdl-navigation__link' href='/p/kontakt.html'>Kontakt</a>
       </nav>
     </div>
-
+    <!-- MDL layout control: content -->
     <main class='mdl-layout__content'>
       <div class='page-content'><!-- Your content goes here -->
+        <!-- MDL grid -->
         <div class='mdl-grid' style='max-width: 1870px'>
+          <!-- MDL grid: empty space cell -->
           <div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet  mdl-cell--hide-phone'/>
+          <!-- MDL grid: empty main content -->
           <div class='mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone'>
             <b:section class='main' id='main'>
               <b:widget id='Blog1' locked='false' title='Blogposts' type='Blog'>
@@ -540,6 +545,7 @@
               </b:widget>
             </b:section>
           </div>
+          <!-- MDL grid: sidebar -->
           <div class='mdl-cell mdl-cell--2-col mdl-cell--3-col-tablet mdl-cell--hide-phone'>
             <b:section class='sidebar' id='sidebar'>
               <b:widget id='Label1' locked='false' title='Tags' type='Label'>
@@ -711,6 +717,7 @@
               </b:includable>
               </b:widget>
             </b:section></div>
+          <!-- MDL grid: empty space cell -->
           <div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet  mdl-cell--hide-phone'/>
         </div>
       </div>
