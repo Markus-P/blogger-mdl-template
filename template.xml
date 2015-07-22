@@ -296,7 +296,7 @@
         <div class='mdl-grid' style='max-width: 1870px'>
           <!-- MDL grid: empty space cell -->
           <div class='mdl-cell mdl-cell--2-col mdl-cell--hide-tablet  mdl-cell--hide-phone'/>
-          <!-- MDL grid: empty main content -->
+          <!-- MDL grid: main content -->
           <div class='mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone'>
             <b:section class='main' id='main'>
               <b:widget id='Blog1' locked='false' title='Blogposts' type='Blog'>
@@ -368,27 +368,47 @@
                         <!-- /post-title -->
                         <!-- post-body -->
                         <div class='mdl-card__supporting-text mdl-color-text--grey-600'>
-                          <!-- post-date-->
-                          <b:if cond='data:i.timestamp'>
-                            <p>
-                              <i class='material-icons mp-vertical-align--middle'>schedule</i>
-                              <span class='mdl-card__subtitle-text post-date mp-vertical-align--middle' expr:id='&quot;timestamp&quot; + data:i.id' itemprop='date'><data:i.timestamp/></span>
-                              <script type='text/javascript'>setInnerHtml(&#39;timestamp<data:i.id/>&#39;, formatTimestamp(&#39;<data:i.timestamp/>&#39;));</script>                       
-                            </p>
-                          </b:if>
-                          <!-- /post-date-->
+                          <p>
+                            <!-- post-date-->
+                            <b:if cond='data:i.timestamp'>
+                              <div>
+                                <i class='material-icons mp-vertical-align--middle'>schedule</i>
+                                <span class='mdl-card__subtitle-text post-date mp-vertical-align--middle' expr:id='&quot;timestamp&quot; + data:i.id' itemprop='date'><data:i.timestamp/></span>
+                                <script type='text/javascript'>setInnerHtml(&#39;timestamp<data:i.id/>&#39;, formatTimestamp(&#39;<data:i.timestamp/>&#39;));</script>                       
+                              </div>
+                            </b:if>
+                            <!-- /post-date-->
+                          </p>
                           <!-- summary -->
                           <div expr:id='&quot;summary&quot; + data:i.id'><b:if cond='data:i.snippet'><data:i.snippet/></b:if></div>
                           <!-- /summary -->
                         </div>
                         <!-- /post-body -->
                         <div class='mdl-card__actions mdl-card--border'>
+                          <!-- post-location -->
+                          <b:if cond='data:top.showLocation'>
+                            <b:if cond='data:post.location'>
+                              <div>
+                                <i class='material-icons mp-vertical-align--middle'>place</i> 
+                                <!-- <data:postLocationLabel/> -->                                
+                                <!-- Flat button with ripple -->
+                                <a class='mp-vertical-align--middle' expr:href='data:i.location.mapsUrl' target='_blank'>
+                                  <button class='mdl-button mdl-js-button mdl-js-ripple-effect'>
+                                    <data:i.location.name/>
+                                  </button>
+                                </a>
+                              </div>
+                            </b:if>
+                          </b:if>
+                          <!-- post-location -->
                           <!-- labels -->
-                          <i class='material-icons mp-vertical-align--middle'>label_outline</i>
-                          <b:loop values='data:i.labels' var='label'>      
-                            <b:include data='label' name='post-label'/>    
-                          </b:loop>
-                          <!-- /labels -->
+                          <div>
+                            <i class='material-icons mp-vertical-align--middle'>label_outline</i>
+                            <b:loop values='data:i.labels' var='label'>      
+                              <b:include data='label' name='post-label'/>    
+                            </b:loop>
+                            <!-- /labels -->
+                          </div>
                         </div>
                         <div class='mdl-card__menu'>
                           <button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect'>
